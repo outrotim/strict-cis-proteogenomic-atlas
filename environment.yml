@@ -1,0 +1,19 @@
+name: strict-cis-proteogenomic-atlas
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - r-base=4.5.1
+  - r-data.table
+  - r-ggplot2
+  - r-patchwork
+  - r-scales
+  - r-gridextra
+  - r-remotes
+  - plink=1.90
+
+# R packages used in the analysis but not consistently available from conda:
+# remotes::install_github("MRCIEU/TwoSampleMR@v0.7.0")
+# remotes::install_github("MRCIEU/ieugwasr@v1.1.0")
+# install.packages("coloc")       # analysis version 5.2.3
+# remotes::install_github("jrs95/hyprcoloc")  # analysis version 0.0.2
