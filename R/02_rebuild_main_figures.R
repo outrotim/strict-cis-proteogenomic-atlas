@@ -62,6 +62,7 @@ save_figure <- function(plot, stem, width, height) {
 }
 
 flow <- to_num(read_set("flow"), "value")
+pav_summary <- to_num(read_set("pav_summary"), "value")
 stage1 <- read_set("stage1")
 regional <- to_num(read_set("regional"), c("PP.H4", "min_PP.H4"))
 regional <- to_logical(regional, c("strong_all_priors", "hypr_pqtl_strong_support"))
@@ -156,14 +157,26 @@ save_figure(fig1, "Figure1", 7.2, 6.7)
 # Figure 2: evidence contraction, prior sensitivity, and evidence states.
 attrition <- flow[stage %chin% c("Primary pairs", "Main-prior regional", "Discovery-stable")]
 attrition[, x := seq_len(.N)]
+pav_grn <- pav_summary[stage == "GRN pairs retaining FDR", value]
+pav_rmdn1 <- pav_summary[stage == "RMDN1 pairs retaining FDR", value]
+pav_bag3 <- pav_summary[stage == "BAG3 instruments after exclusion", value]
+stopifnot(length(pav_grn) == 1L, pav_grn == 2L,
+          length(pav_rmdn1) == 1L, pav_rmdn1 == 1L,
+          length(pav_bag3) == 1L, pav_bag3 == 0L)
+pav_label <- sprintf(
+  "Post hoc PAV sensitivity\nGRN (%d pairs) and RMDN1 (%d) retained FDR\nBAG3 non-evaluable after exclusion",
+  pav_grn, pav_rmdn1
+)
 p2a <- ggplot(attrition, aes(x, 1)) +
   geom_tile(width = .75, height = .48, fill = "white", colour = C$line, linewidth = .45) +
   geom_segment(data = attrition[x < max(x)], aes(x = x + .38, xend = x + .62, y = 1, yend = 1),
     arrow = arrow(length = unit(.06, "inches")), colour = C$mid) +
   geom_text(aes(label = value), y = 1.05, fontface = "bold", size = 4.2) +
   geom_text(aes(label = stage), y = .89, size = 2.2, colour = C$mid) +
-  scale_x_continuous(limits = c(.55, 3.45)) + scale_y_continuous(limits = c(.70, 1.30)) +
-  labs(title = "A  Evidence contraction") + theme_void() +
+  annotate("label", x = 3, y = .61, label = pav_label, size = 1.75,
+    lineheight = .9, colour = C$coral, fill = "white", linewidth = .25) +
+  scale_x_continuous(limits = c(.55, 3.70)) + scale_y_continuous(limits = c(.48, 1.30)) +
+  labs(title = "A  Evidence qualification and downgrade") + theme_void() +
   theme(plot.title = element_text(face = "bold", size = 8.5))
 
 strong <- regional[PP.H4 > .80]

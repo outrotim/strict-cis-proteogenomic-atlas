@@ -1,9 +1,9 @@
-# Strict-cis proteogenomic atlas for outcome-stratified target prioritization
+# Strict-cis proteogenomic atlas across cardiometabolic and neuropsychiatric outcomes
 
 This repository contains the minimal code and derived inputs needed to inspect
 the principal analysis definitions and redraw the four main figures for the
-manuscript **"A strict-cis proteogenomic atlas for outcome-stratified
-circulating protein target prioritization."**
+manuscript **"A strict-cis proteogenomic atlas for prioritizing circulating
+proteins across cardiometabolic and neuropsychiatric outcomes."**
 
 The repository is intentionally limited. It does not redistribute source GWAS,
 QTL, LD-reference, participant-level, or institutional data, and it is not a
@@ -17,7 +17,8 @@ complete archive of every supplementary or audit analysis.
 - `R/02_rebuild_main_figures.R`: redraws Figures 1-4 from the released derived
   input table.
 - `data/main_figure_inputs.tsv`: aggregate, non-participant-level values used
-  by the four main figures.
+  by the four main figures, including the post hoc protein-altering-variant
+  sensitivity summary shown in Figure 2.
 - `environment.yml`: principal R and command-line dependencies.
 - `LICENSE`: MIT License for code.
 - `LICENSE-DATA`: CC BY 4.0 terms for the derived figure input table.
@@ -96,6 +97,9 @@ files in `output/`. A different destination can be supplied with the
   the analyses did not support biological separation between them.
 - Cardiometabolic-outcome proteins should not be interpreted as
   neuroprotective targets.
+- The post hoc protein-altering-variant sensitivity did not update discovery
+  classes, scores, or tiers. A retained association does not exclude other
+  assay-binding or pleiotropic effects.
 - The evidence score is a heuristic ranking rubric with partly related
   components. It is not a probability of target validity or treatment success.
 - Most source datasets were predominantly of European ancestry. The bounded
@@ -114,5 +118,6 @@ original terms and are not relicensed by this repository.
 
 Citation details will be added after journal publication.
 
-> Study 10 authors. A strict-cis proteogenomic atlas for outcome-stratified
-> circulating protein target prioritization. Manuscript under review.
+> Study 10 authors. A strict-cis proteogenomic atlas for prioritizing
+> circulating proteins across cardiometabolic and neuropsychiatric outcomes.
+> Manuscript under review.
